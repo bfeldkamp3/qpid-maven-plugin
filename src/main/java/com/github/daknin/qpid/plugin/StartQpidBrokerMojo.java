@@ -5,6 +5,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.qpid.server.BrokerOptions;
 
 import java.util.Properties;
 
@@ -23,16 +24,34 @@ public class StartQpidBrokerMojo extends AbstractMojo {
     private String qpidWork;
 
     /**
+     * The root directory for any data written by the broker.
+     */
+    @Parameter(property = "initialConfigurationLocation", defaultValue = "${basedir}/qpid/config.json")
+    private String initialConfigurationLocation;
+
+    /**
      * The port that the broker should listen on for amqp requests.
      */
-    @Parameter(property = "amqpPort")
+    @Parameter(property = "amqpPort", defaultValue = BrokerOptions.DEFAULT_AMQP_PORT_NUMBER)
     private int amqpPort;
 
     /**
      * The port that the broker should listen on for http requests.
      */
-    @Parameter(property = "httpPort")
+    @Parameter(property = "httpPort", defaultValue = BrokerOptions.DEFAULT_HTTP_PORT_NUMBER)
     private int httpPort;
+
+    /**
+     * The port that the broker should listen on for rmi requests.
+     */
+    @Parameter(property = "rmiPort", defaultValue = BrokerOptions.DEFAULT_RMI_PORT_NUMBER)
+    private int rmiPort;
+
+    /**
+     * The port that the broker should listen on for jmx requests.
+     */
+    @Parameter(property = "jmxPort", defaultValue = BrokerOptions.DEFAULT_JMX_PORT_NUMBER)
+    private int jmxPort;
 
     /**
      * Skip execution of the Qpid Broker plugin if set to true
@@ -44,6 +63,30 @@ public class StartQpidBrokerMojo extends AbstractMojo {
      * Broker manager used to start and stop the broker.
      */
     private MavenQpidBrokerManager brokerManager;
+
+    public int getHttpPort() {
+        return httpPort;
+    }
+
+    public int getAmqpPort() {
+        return amqpPort;
+    }
+
+    public String getInitialConfigurationLocation() {
+        if (initialConfigurationLocation != null) {
+            return initialConfigurationLocation;
+        } else {
+            return qpidHome + "/config.json";
+        }
+    }
+
+    public String getQpidWork() {
+        return qpidWork;
+    }
+
+    public String getQpidHome() {
+        return qpidHome;
+    }
 
     public void setHttpPort(int httpPort) {
         this.httpPort = httpPort;
@@ -59,6 +102,10 @@ public class StartQpidBrokerMojo extends AbstractMojo {
 
     public void setQpidHome(String qpidHome) {
         this.qpidHome = qpidHome;
+    }
+
+    public void setInitialConfigurationLocation(String initialConfigurationLocation) {
+        this.initialConfigurationLocation = initialConfigurationLocation;
     }
 
     /**
@@ -80,8 +127,9 @@ public class StartQpidBrokerMojo extends AbstractMojo {
         getLog().info("Loading Qpid broker");
         getLog().info("QPID_HOME: " + qpidHome);
         getLog().info("QPID_WORK: " + qpidWork);
+        getLog().info("Config file: " + getInitialConfigurationLocation());
 
-        this.getBrokerManager().start(amqpPort, httpPort, qpidHome, qpidWork);
+        this.getBrokerManager().start(amqpPort, httpPort, rmiPort, jmxPort, qpidHome, qpidWork, getInitialConfigurationLocation());
 
         getLog().info("Started the Qpid Broker");
     }
