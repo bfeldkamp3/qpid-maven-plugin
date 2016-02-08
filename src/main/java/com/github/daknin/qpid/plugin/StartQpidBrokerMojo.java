@@ -13,7 +13,7 @@ public class StartQpidBrokerMojo extends AbstractMojo {
     /**
      * The root directory for any config used by the broker.
      */
-    @Parameter(property = "qpidHome", defaultValue = "${basedir}/qpid")
+    @Parameter(property = "qpidHome", defaultValue = "${basedir}/src/test/qpid")
     private String qpidHome;
 
     /**
