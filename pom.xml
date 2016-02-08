@@ -12,6 +12,13 @@
     </description>
     <url>https://github.com/daknin/qpid-maven-plugin</url>
 
+    <developers>
+        <developer>
+            <name>Darrell King</name>
+            <email>kingdarrella@gmail.com</email>
+        </developer>
+    </developers>
+
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
