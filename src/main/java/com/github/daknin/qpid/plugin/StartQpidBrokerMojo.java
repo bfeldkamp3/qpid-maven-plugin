@@ -1,5 +1,7 @@
 package com.github.daknin.qpid.plugin;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOExceptionWithCause;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -7,6 +9,8 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.qpid.server.BrokerOptions;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
 
 @Mojo( name = "start", defaultPhase = LifecyclePhase.PRE_INTEGRATION_TEST )
@@ -128,6 +132,13 @@ public class StartQpidBrokerMojo extends AbstractMojo {
         getLog().info("QPID_HOME: " + qpidHome);
         getLog().info("QPID_WORK: " + qpidWork);
         getLog().info("Config file: " + getInitialConfigurationLocation());
+
+        File qpidWorkDir = new File(qpidWork);
+        try {
+            FileUtils.deleteDirectory(qpidWorkDir);
+        } catch (IOException e) {
+            throw new MojoExecutionException("Failed to clean QPID_WORK", e);
+        }
 
         this.getBrokerManager().start(amqpPort, httpPort, rmiPort, jmxPort, qpidHome, qpidWork, getInitialConfigurationLocation());
 
