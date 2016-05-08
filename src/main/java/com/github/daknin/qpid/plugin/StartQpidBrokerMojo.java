@@ -117,7 +117,7 @@ public class StartQpidBrokerMojo extends AbstractMojo {
      * connector URIs in the maven project properties on startup, which enables the use of variable substitution in
      * the pom.xml file to determine the address of the connector using the standard ${...} syntax.
      *
-     * @throws MojoExecutionException
+     * @throws MojoExecutionException if the broker cant be started.
      */
     @Override
     public void execute() throws MojoExecutionException {

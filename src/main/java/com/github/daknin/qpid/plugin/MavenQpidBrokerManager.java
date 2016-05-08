@@ -13,14 +13,14 @@ public interface MavenQpidBrokerManager {
      * @param qpidHomeDir The root directory for any config used by the broker.
      * @param qpidWorkDir The root directory for any data written by the broker.
      * @param initialConfigLocation The config file that the broker should be configured from.
-     * @throws MojoExecutionException
+     * @throws MojoExecutionException if the broker cant be started.
      */
     void start(int amqpPort, int httpPort, int rmiPort, int jmxPort, String qpidHomeDir, String qpidWorkDir, String initialConfigLocation) throws MojoExecutionException;
 
     /**
      * Stop the broker.
      *
-     * @throws MojoExecutionException
+     * @throws MojoExecutionException if the broker cant be stopped.
      */
     void stop() throws MojoExecutionException;
 }
