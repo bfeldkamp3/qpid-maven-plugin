@@ -1,7 +1,6 @@
 package com.github.daknin.qpid.plugin;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOExceptionWithCause;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -133,7 +132,7 @@ public class StartQpidBrokerMojo extends AbstractMojo {
         getLog().info("QPID_WORK: " + qpidWork);
         getLog().info("Config file: " + getInitialConfigurationLocation());
 
-        getLog().debug("Cleaning " + qpidWork);
+        getLog().info("Cleaning " + qpidWork);
         File qpidWorkDir = new File(qpidWork);
         try {
             FileUtils.deleteDirectory(qpidWorkDir);

@@ -1,0 +1,4 @@
+qpid.amqpPort=${qpid.amqpPort}
+qpid.httpPort=${qpid.httpPort}
+qpid.rmiPort=${qpid.rmiPort}
+qpid.jmxPort=${qpid.jmxPort}
