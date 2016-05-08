@@ -133,6 +133,7 @@ public class StartQpidBrokerMojo extends AbstractMojo {
         getLog().info("QPID_WORK: " + qpidWork);
         getLog().info("Config file: " + getInitialConfigurationLocation());
 
+        getLog().debug("Cleaning " + qpidWork);
         File qpidWorkDir = new File(qpidWork);
         try {
             FileUtils.deleteDirectory(qpidWorkDir);
