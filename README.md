@@ -1,4 +1,4 @@
-# qpid-maven-plugin [![Build Status](https://travis-ci.org/daknin/qpid-maven-plugin.svg?branch=master)](https://travis-ci.org/daknin/qpid-maven-plugin) [![codecov.io](https://codecov.io/github/daknin/qpid-maven-plugin/coverage.svg?branch=master)](https://codecov.io/github/daknin/qpid-maven-plugin?branch=master)
+# qpid-maven-plugin [![Build Status](https://travis-ci.org/daknin/qpid-maven-plugin.svg?branch=master)](https://travis-ci.org/daknin/qpid-maven-plugin) [![codecov.io](https://codecov.io/github/daknin/qpid-maven-plugin/coverage.svg?branch=master)](https://codecov.io/github/daknin/qpid-maven-plugin?branch=master) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.daknin/qpid-maven-plugin/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.github.daknin/qpid-maven-plugin)
 
 A maven plugin that configures an Apache Qpid AMQP broker within maven lifecycle. Useful when running integration tests with the [failsafe plugin](https://maven.apache.org/surefire/maven-failsafe-plugin/) that require a running AMQP broker such as RabbitMQ.
 
